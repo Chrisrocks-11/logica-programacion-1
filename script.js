@@ -1,3 +1,4 @@
+
 // --- 1. SOLICITUD Y CONVERSIÓN DE DATOS ---
 
 // Solicitamos al usuario tres números y los convertimos a un formato numérico.
@@ -12,7 +13,7 @@ if (isNaN(num1) || isNaN(num2) || isNaN(num3)) {
     alert("Error: Debes ingresar tres números válidos. Por favor, recarga la página.");
 } else {
 
-    // --- 3. PROCESAMIENTO INICIAL ---
+    // --- 3. PROCESAMIENTO Y LÓGICA ---
 
     // Obtenemos una referencia al elemento del DOM donde mostraremos el resultado.
     const resultadoContainer = document.getElementById('resultado');
@@ -27,11 +28,35 @@ if (isNaN(num1) || isNaN(num2) || isNaN(num3)) {
         resultadoContainer.innerHTML = `<p>${mensajeIguales}</p>`;
 
     } else {
-        // Si no son iguales, por ahora solo mostramos los números ingresados.
-        // La lógica de ordenamiento se añadirá en el siguiente commit.
-        const mensajePendiente = `Los números ingresados fueron: ${num1}, ${num2}, ${num3}. La lógica de ordenamiento se implementará a continuación.`;
+        // Si los números no son todos iguales, procedemos a ordenarlos.
         
-        console.log(mensajePendiente);
-        resultadoContainer.innerHTML = `<p>${mensajePendiente}</p>`;
+        // Creamos un arreglo con los tres números para facilitar el ordenamiento.
+        const numeros = [num1, num2, num3];
+
+        // --- Ordenamiento de Mayor a Menor ---
+        // Usamos una copia del arreglo y el método .sort() con una función descendente.
+        const ordenadosMayorAMenor = [...numeros].sort((a, b) => b - a);
+
+        // --- Ordenamiento de Menor a Mayor ---
+        // Usamos una copia del arreglo y el método .sort() con una función ascendente.
+        const ordenadosMenorAMayor = [...numeros].sort((a, b) => a - b);
+        
+        // --- 4. MOSTRAR RESULTADOS ---
+
+        // Creamos las cadenas de texto que mostraremos.
+        const textoMayorMenor = `Orden de mayor a menor: ${ordenadosMayorAMenor.join(', ')}`;
+        const textoMenorMayor = `Orden de menor a mayor: ${ordenadosMenorAMayor.join(', ')}`;
+
+        // Mostramos los resultados en la consola.
+        console.log("--- Resultados del Ordenamiento ---");
+        console.log(textoMayorMenor);
+        console.log(textoMenorMayor);
+        
+        // Mostramos los resultados finales en la página web (DOM).
+        resultadoContainer.innerHTML = `
+            <p>Los números ingresados fueron: ${numeros.join(', ')}</p>
+            <p><strong>${textoMayorMenor}</strong></p>
+            <p><strong>${textoMenorMayor}</strong></p>
+        `;
     }
 }
